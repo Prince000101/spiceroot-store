@@ -47,14 +47,16 @@ function ProductDetails() {
         if (mounted && data) {
           setProduct(data);
           if (data.variants?.length > 0) setSelectedVariant(data.variants[0]);
-          setRelatedProducts([
-            { id: 1, name: "Kanda Lasun Masala", price: 85, image: "/placeholder.jpg" },
-            { id: 2, name: "Malvani Masala", price: 95, image: "/placeholder.jpg" },
-          ]);
-          setReviews([
-            { id: 1, user: "Rahul K.", rating: 5, comment: "Amazing quality, genuine product!", date: "2 days ago" },
-            { id: 2, user: "Priya S.", rating: 4, comment: "Good packaging, fast delivery.", date: "1 week ago" },
-          ]);
+          try {
+            const allRes = await axios.get("/api/products");
+            const allProducts = Array.isArray(allRes.data) ? allRes.data : [];
+            const related = allProducts
+              .filter((p) => p._id !== data._id)
+              .sort(() => Math.random() - 0.5)
+              .slice(0, 4);
+            setRelatedProducts(related);
+          } catch { setRelatedProducts([]); }
+          setReviews([]);
           const recent = JSON.parse(localStorage.getItem("recentlyViewed") || "[]");
           const updatedRecent = [data, ...recent.filter((item) => item._id !== data._id)].slice(0, 5);
           localStorage.setItem("recentlyViewed", JSON.stringify(updatedRecent));
@@ -250,7 +252,7 @@ function ProductDetails() {
           <h2 className="text-lg sm:text-xl md:text-2xl font-playfair font-bold text-forest dark:text-cream mb-6 sm:mb-8">You May Also Like</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
             {relatedProducts.map((item) => (
-              <Link to={`/product/${item.id}`} key={item.id} className="group block bg-white dark:bg-charcoal-light p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-sm border border-sand/20 dark:border-forest-light/30 transition-all hover:-translate-y-1 hover:shadow-xl">
+              <Link to={`/products/${item._id}`} key={item._id} className="group block bg-white dark:bg-charcoal-light p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-sm border border-sand/20 dark:border-forest-light/30 transition-all hover:-translate-y-1 hover:shadow-xl">
                 <div className="aspect-square bg-sand/20 dark:bg-charcoal rounded-lg sm:rounded-xl mb-3 sm:mb-4 overflow-hidden">
                   <img src={item.image} alt={item.name} className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal group-hover:scale-110 transition-transform duration-500" />
                 </div>
