@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://spiceroot-api.onrender.com/api/:path*" },
+    { "source": "/uploads/:path*", "destination": "https://spiceroot-api.onrender.com/uploads/:path*" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}
