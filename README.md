@@ -7,14 +7,14 @@ Full-stack e-commerce platform for homemade Maharashtrian masalas and papad, bui
 
 ---
 
-## URLs (Local Dev)
+## Live Demo
 
-| Service      | URL                              |
-|--------------|----------------------------------|
-| Frontend     | http://localhost:5173            |
-| Backend API  | http://localhost:5004            |
-| Admin Panel  | http://localhost:5173/admin      |
-| Admin Login  | http://localhost:5173/admin/login |
+| URL | Link |
+|---|---|
+| **Frontend** | https://spiceroot-store.vercel.app/ |
+| **Backend API** | https://spiceroot-store.onrender.com/api/products |
+| **Admin Panel** | https://spiceroot-store.vercel.app/admin |
+| **Backend Images** | https://spiceroot-store.onrender.com/uploads/01.jpg |
 
 ---
 
@@ -24,8 +24,8 @@ Full-stack e-commerce platform for homemade Maharashtrian masalas and papad, bui
 
 | Field    | Value                    |
 |----------|--------------------------|
-| Email    | prince@creatordev.in     |
-| Password | Admin@123                |
+| Email    | Set via `ADMIN_EMAIL` env var |
+| Password | Set via `ADMIN_PASSWORD` env var |
 
 ### Regular Users
 
@@ -43,8 +43,8 @@ No default user is seeded. Users must **register themselves** at `/register`. Af
 ### 1. Clone & Install
 
 ```bash
-git clone <repo-url>
-cd spiceroot
+git clone https://github.com/Prince000101/spiceroot-store.git
+cd spiceroot-store
 
 # Backend
 cd backend
@@ -59,10 +59,11 @@ npm install
 
 ```env
 PORT=5004
-MONGO_URI=<your-mongodb-connection-string>
-JWT_SECRET=<generate with: openssl rand -hex 64>
+MONGO_URI=<your-mongodb-atlas-uri>
+JWT_SECRET=<generate-with-openssl-rand-hex-64>
 ADMIN_PASSWORD=<your-admin-password>
-ADMIN_EMAIL=prince@creatordev.in
+ADMIN_EMAIL=<your-admin-email>
+CLIENT_URL=http://localhost:3004
 ```
 
 ### 3. Seed Database & Run
@@ -75,7 +76,7 @@ npm start       # http://localhost:5004
 
 # Terminal 2 — Frontend
 cd frontend
-npm run dev     # http://localhost:5173
+npm run dev     # http://localhost:3004
 ```
 
 ---
@@ -129,6 +130,16 @@ npm run dev     # http://localhost:5173
 | Database | MongoDB Atlas                                 |
 | Auth     | JWT (30-day expiry)                           |
 | Rate Limiting | express-rate-limit (100 req/15min global, 20 req/15min on auth) |
+
+---
+
+## Deployment
+
+| Service | Role | URL | Cost |
+|---|---|---|---|
+| Vercel | Frontend | https://spiceroot-store.vercel.app | Free |
+| Render | Backend | https://spiceroot-store.onrender.com | Free |
+| MongoDB Atlas | Database | Cloud hosted | Free |
 
 ---
 
