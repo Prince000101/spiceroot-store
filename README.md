@@ -61,7 +61,7 @@ npm install
 PORT=5004
 MONGO_URI=<your-mongodb-connection-string>
 JWT_SECRET=<generate with: openssl rand -hex 64>
-ADMIN_PASSWORD=Admin@123
+ADMIN_PASSWORD=<your-admin-password>
 ADMIN_EMAIL=prince@creatordev.in
 ```
 
